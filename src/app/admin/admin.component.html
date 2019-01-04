@@ -1,0 +1,28 @@
+
+
+<div id="main-wrapper">
+  <app-top-bar></app-top-bar>
+  <app-side-bar></app-side-bar>
+  <div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+      <!-- ============================================================== -->
+      <!-- Bread crumb and right sidebar toggle -->
+      <!-- ============================================================== -->
+      <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+          <h4 class="text-themecolor">Admin Dashboard</h4>
+        </div>
+      </div>
+
+      <app-widget-data></app-widget-data>
+      <button class="btn btn-secondary" (click)="logout()">Logout</button>
+    </div>
+  </div>
+  <footer class="footer">
+    © 2018 By Maradjah
+  </footer>
+</div>
+

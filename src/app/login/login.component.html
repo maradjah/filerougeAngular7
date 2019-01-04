@@ -1,0 +1,53 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+  Logged in as {{roles}}.
+  <button class="btn btn-secondary" (click)="logout()">Logout</button>
+</div>
+
+<ng-template #loggedOut>
+  <section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+      <div class="login-box card">
+        <div class="card-body">
+          <form class="form-horizontal form-material" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <h3 class="box-title m-b-20">Connection</h3>
+            <div class="form-group ">
+              <div class="col-xs-12">
+                <input type="text" class="form-control" name="username" [(ngModel)]="form.username" #username="ngModel"
+                       required placeholder="Username">
+                <div *ngIf="f.submitted && username.invalid">
+                  <div *ngIf="username.errors.required">Username is required</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+                       required minlength="6">
+                <div *ngIf="f.submitted && password.invalid">
+                  <div *ngIf="password.errors.required">Password is required</div>
+                  <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center">
+              <div class="col-xs-12 p-b-20">
+                <div class="form-group">
+                  <button class="btn btn-block btn-lg btn-info btn-rounded">Login</button>
+                  <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+                    Erreur Login: {{errorMessage}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group m-b-0">
+              <div class="col-sm-12 text-center">
+                Rejoindre File Rouge ? <a [routerLink]="" (click)="onGoToSignup()">S'inscrire</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>
+

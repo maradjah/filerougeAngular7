@@ -1,0 +1,79 @@
+<div *ngIf="isSignedUp; else signupForm">
+  Your registration is successful. Please <a href="login">login</a>!
+</div>
+
+<ng-template #signupForm>
+  <section id="wrapper">
+    <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+      <div class="login-box card">
+        <div class="card-body">
+          <form class="form-horizontal form-material" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <h3 class="box-title m-b-20">Inscription</h3>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" name="name" [(ngModel)]="form.name" #name="ngModel" required  placeholder="Nom">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" name="prenom" [(ngModel)]="form.prenom" #name="ngModel" required placeholder="Prénom">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" name="username" [(ngModel)]="form.username" #username="ngModel" required  placeholder="Login">
+              </div>
+            </div>
+            <div class="form-group ">
+              <div class="col-xs-12">
+                <input class="form-control" type="text" name="email" [(ngModel)]="form.email" #email="ngModel" required email  placeholder="Email"/>
+                <div *ngIf="f.submitted && email.invalid">
+                  <div *ngIf="email.errors.required">Email is required</div>
+                  <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group ">
+              <div class="col-xs-12">
+                <input class="form-control" id="password" type="password" class="form-control" name="password" [(ngModel)]="form.password" #password="ngModel"
+                       required minlength="6" placeholder="Password">
+                <div *ngIf="f.submitted && password.invalid">
+                  <div *ngIf="password.errors.required">Password is required</div>
+                  <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <div class="form-group  row">
+                  <label class="col-2 col-form-label">Role: </label>
+                  <div class="col-10">
+                    <select class="form-control" name="role" [(ngModel)]="form.role" #role="ngModel" required>
+                      <option>Admin</option>
+                      <option>Etudiant</option>
+                      <option>Formateur</option>
+                      <option>Personnel</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group text-center p-b-20">
+              <div class="col-xs-12">
+                <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">S'inscrire</button>
+                <div *ngIf="f.submitted && isSignUpFailed" class="alert alert-warning">
+                  Signup failed!<br/>{{errorMessage}}
+                </div>
+              </div>
+            </div>
+            <div class="form-group m-b-0">
+              <div class="col-sm-12 text-center">
+                Vous avez un compte ? <a [routerLink]="" (click)="onGoToLogin()">Login</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-template>
